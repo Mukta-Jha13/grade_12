@@ -34,6 +34,143 @@
             <!-- All Chapter 1 content here -->
           </section>
 
+            <section id="ch4" class="chapter-content" style="display:none;">
+  <div class="unit">
+    <h2>Unit 4</h2>
+    <h1>C Programming</h1>
+  </div>
+    <div class="content">
+          <div class="functions">
+    <h3>Functions</h3>
+    <ul>
+      <li>Introduction and syntax</li>
+      <li>Purpose, Advantages</li>
+      <li>Components of a function
+        <ul>
+          <li>Prototype</li>
+          <li>Function Definition</li>
+          <li>Function Call</li>
+          <li>Return Statement</li>
+        </ul>
+      </li>
+      <li>Types (Library and User Defined)</li>
+      <li>Passing Arguments
+        <ul>
+          <li>Call By Value</li>
+          <li>Call By Reference</li>
+        </ul>
+      </li>
+      <li>Variable and its Scope
+        <ul>
+          <li>Local</li>
+          <li>Global</li>
+        </ul>
+      </li>
+      <li>Storage Class
+        <ul>
+          <li>Automatic</li>
+          <li>External</li>
+          <li>Static</li>
+          <li>Register</li>
+        </ul>
+      </li>
+      <li>Function with Array with example</li>
+      <li>Recursive Function with syntax and code examples
+        <ul>
+          <li>Advantages</li>
+          <li>Disadvantages</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="structure_union">
+    <h3>Structure and Union</h3>
+    <h4>Structure:</h4>
+    <ul>
+      <li>Introduction and Syntax</li>
+      <li>Structure Size</li>
+      <li>Accessing Members of structure with code example</li>
+      <li>Nested Structure with code example</li>
+      <li>Array of Structure with code example</li>
+      <li>Passing Structure to Function with code example</li>
+    </ul>
+    <h4>Union:</h4>
+    <ul>
+      <li>Introduction and Syntax</li>
+      <li>Comparison between Structure and Union</li>
+    </ul>
+  </div>
+
+  <div class="pointers">
+    <h3>Pointers</h3>
+    <ul>
+      <li>Introduction and Syntax</li>
+      <li>Usage and Working</li>
+      <li>Concept of Value and Address</li>
+      <li>Declaration and Initialization</li>
+      <li>Pointer and Function with code example</li>
+      <li>Call by Reference with code example</li>
+      <li>Comparison between Call by Value and Call by Reference</li>
+      <li>Pointer with Arrays with code example</li>
+      <li>Advantages and Disadvantages</li>
+    </ul>
+  </div>
+
+  <div class="file_handling">
+    <h3>File Handling</h3>
+    <ul>
+      <li>Concept of Data File</li>
+      <li>Need for File Handling in C</li>
+      <li>Sequential and Random Files</li>
+      <li>File Handling Functions (Define all functions with its purpose and syntax):
+        <ul>
+          <li>fopen(), fclose()</li>
+          <li>getc(), putc()</li>
+          <li>fprintf(), fscanf()</li>
+          <li>getw(), putw()</li>
+          <li>fgets(), fputs()</li>
+          <li>fread(), fwrite()</li>
+          <li>remove(), rename()</li>
+        </ul>
+      </li>
+      <li>Random Access Functions (Define with its purpose and syntax):
+        <ul>
+          <li>fseek()</li>
+          <li>rewind()</li>
+          <li>ftell()</li>
+        </ul>
+      </li>
+      <li>File Opening Modes:
+        <ul>
+          <li>Read (r, r+)</li>
+          <li>Write (w, w+)</li>
+          <li>Append (a, a+)</li>
+        </ul>
+      </li>
+      <li>Steps to Work with File in C:
+        <ul>
+          <li>Define File Pointer</li>
+          <li>Open File with Required Mode</li>
+          <li>Read, Write, Append Operations</li>
+          <li>Close the File</li>
+          <li>Reading Data from Files</li>
+          <li>Writing Data on Files</li>
+          <li>Appending Data Files</li>
+          <li>End of File (EOF)</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="typedef">
+    <h3>Typedef Keyword in C</h3>
+  </div>
+
+     </div>
+
+</section>
+
           <section id="ch1" class="chapter-content" style="display: none;">
             <div class="unit">
                 <h2>Chapter-1</h2>
@@ -280,6 +417,36 @@
             <h4>DATETIME- Date and time format YYYY-MM-DD HH:MM:SS</h4>
 
            </div>
+               <h3>SQL Join</h3>
+
+        <h4>Inner Join</h4>
+        <p>Returns records that have matching values in both tables.</p>
+        <pre><code>SELECT A.column1, B.column2
+                 FROM TableA A
+                 INNER JOIN TableB B
+                 ON A.common_field = B.common_field;</code></pre>
+
+        <h4>Left Join (Left Outer Join)</h4>
+        <p>Returns all records from the left table, and matched records from the right table. If no match, NULL on right side.</p>
+        <pre><code>SELECT A.column1, B.column2
+                 FROM TableA A
+                 LEFT JOIN TableB B
+                 ON A.common_field = B.common_field;</code></pre>
+
+        <h4>Right Join (Right Outer Join)</h4>
+        <p>Returns all records from the right table, and matched records from the left table. If no match, NULL on left side.</p>
+        <pre><code>SELECT A.column1, B.column2
+                 FROM TableA A
+                 RIGHT JOIN TableB B
+                 ON A.common_field = B.common_field;</code></pre>
+
+        <h4>Full Join (Full Outer Join)</h4>
+        <p>Returns all records when there is a match in either left or right table. Non-matching rows will have NULLs.</p>
+        <pre><code>SELECT A.column1, B.column2
+                 FROM TableA A
+                 FULL OUTER JOIN TableB B
+                 ON A.common_field = B.common_field;</code></pre>
+      </div>
         
             </div>
           </section>
@@ -293,4 +460,5 @@
         }
       </script>
 </body>
+
 </html>
