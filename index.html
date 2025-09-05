@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade-12</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+          <ul>
+            <li onclick="showChapter('ch0')">Sylaabus</li>
+            <li onclick="showChapter('ch1')">Database Management System</li>
+            <li onclick="showChapter('ch4')">C Programming II (Unit 4)</li>
+            <!-- Add more chapters here -->
+          </ul>
+        </aside>
+    
+        <main class="content-area">
+          <section id="ch0" class="chapter-content">
+            <div class="syllabus">
+                <table>
+                    <tr><th>S.N.</th><th>Topics</th><th>Content wise marks</th><th>Working hours</th></tr>
+                    <tr><td>1</td><td>Database management system</td><td>8</td><td>12</td></tr>
+                    <tr><td>2</td><td>Data Communication and Networking</td><td>9</td><td>15</td></tr>
+                    <tr><td>3</td><td>Web Tech-II</td><td>8</td><td>12</td></tr>
+                    <tr><td>4</td><td>C Programming II</td><td>8</td><td>12</td></tr>
+                    <tr><td>5</td><td>Object Oriented Programming</td><td>6</td><td>10</td></tr>
+                    <tr><td>6</td><td>Software development life cycle</td><td>6</td><td>10</td></tr>
+                    <tr><td>7</td><td>Recent trends in technology</td><td>5</td><td>9</td></tr>
+                    <tr><td colspan="2">Total</td><td>50</td><td>80</td></tr>
+                </table>
+            </div>
+        
+            <!-- All Chapter 1 content here -->
+          </section>
+
+            <section id="ch4" class="chapter-content" style="display:none;">
+  <div class="unit">
+    <h2>Unit 4</h2>
+    <h1>C Programming</h1>
+  </div>
+    <div class="content">
+      <div class="content">
+
+        <!-- FUNCTIONS -->
+        <div class="functions">
+          <h3>Functions</h3>
+      
+          <h4>Introduction &amp; Syntax</h4>
+          <pre><code class="language-c">/* General form */
+      return_type function_name(parameter_list) {
+          // body
+          return value; // if return_type != void
+      }</code></pre>
+      
+          <h4>Purpose &amp; Advantages</h4>
+          <ul>
+            <li>Modularity, reuse, testability, readability, and easier maintenance.</li>
+            <li>Abstraction: hide details behind a clean interface (prototype).</li>
+          </ul>
+      
+          <h4>Components</h4>
+          <ul>
+            <li><b>Prototype</b>: declares function signature to the compiler.</li>
+            <li><b>Definition</b>: provides the implementation.</li>
+            <li><b>Call</b>: invokes the function.</li>
+            <li><b>Return Statement</b>: sends a value/result back to the caller.</li>
+          </ul>
+      
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int add(int a, int b);          // Prototype
+      
+      int main(void) {
+          int s = add(3, 5);          // Call
+          printf("Sum = %d\n", s);
+          return 0;
+      }
+      
+      int add(int a, int b) {         // Definition
+          return a + b;               // Return Statement
+      }</code></pre>
+      
+          <h4>Types</h4>
+          <ul>
+            <li><b>Library</b>: e.g., <code>printf</code>, <code>scanf</code>, <code>sqrt</code>.</li>
+            <li><b>User-defined</b>: created by the programmer (like <code>add</code> above).</li>
+          </ul>
+      
+          <h4>Passing Arguments</h4>
+          <h5>Call by Value (default in C)</h5>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      void increment(int x) { x = x + 1; }  // modifies copy only
+      
+      int main(void) {
+          int a = 10;
+          increment(a);
+          printf("%d\n", a);                 // still 10
+          return 0;
+      }</code></pre>
+      
+          <h5>Call by Reference (via pointers)</h5>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      void swap(int *x, int *y) {
+          int tmp = *x;
+          *x = *y;
+          *y = tmp;
+      }
+      
+      int main(void) {
+          int a = 2, b = 7;
+          swap(&a, &b);
+          printf("a=%d b=%d\n", a, b); // a=7 b=2
+          return 0;
+      }</code></pre>
+      
+          <h4>Variable &amp; Scope</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int g = 5;                  // Global: visible to all functions after this line
+      
+      void f(void) {
+          int local = 10;         // Local: exists only inside f
+          printf("%d %d\n", g, local);
+      }
+      
+      int main(void) {
+          f();
+          // printf("%d", local); // ERROR: local not visible here
+          return 0;
+      }</code></pre>
+      
+          <h4>Storage Classes</h4>
+          <ul>
+            <li><b>auto</b> (default for locals): block scope, automatic storage.</li>
+            <li><b>extern</b>: refers to a global defined elsewhere (often another file).</li>
+            <li><b>static</b>: 
+              <ul>
+                <li>Inside function: value persists across calls.</li>
+                <li>At file scope: internal linkage (not visible to other translation units).</li>
+              </ul>
+            </li>
+            <li><b>register</b>: hint to store in CPU register (modern compilers often ignore).</li>
+          </ul>
+      
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      void counter(void) {
+          static int c = 0;   // retains value between calls
+          c++;
+          printf("count=%d\n", c);
+      }
+      
+      int main(void) {
+          counter(); counter(); counter();   // prints 1, 2, 3
+          return 0;
+      }</code></pre>
+      
+          <h4>Function with Array</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int sum(const int a[], int n) {   // array parameter decays to pointer
+          int s = 0;
+          for (int i = 0; i &lt; n; ++i) s += a[i];
+          return s;
+      }
+      
+      int main(void) {
+          int x[] = {2, 4, 6, 8};
+          printf("sum = %d\n", sum(x, 4));
+          return 0;
+      }</code></pre>
+      
+          <h4>Recursive Function</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      long long fact(int n) {
+          if (n &lt;= 1) return 1;
+          return n * fact(n - 1);   // recursive call
+      }
+      
+      int main(void) {
+          printf("%lld\n", fact(5)); // 120
+          return 0;
+      }</code></pre>
+          <p><b>Advantages:</b> elegant for divide-and-conquer (trees, factorial, quicksort).  
+             <b>Disadvantages:</b> overhead of function calls; risk of stack overflow if depth is large; iterative versions can be faster.</p>
+        </div>
+      
+        <!-- STRUCTURE & UNION -->
+        <div class="structure_union">
+          <h3>Structure and Union</h3>
+      
+          <h4>Structure — Introduction &amp; Syntax</h4>
+          <pre><code class="language-c">struct Student {
+          int    id;
+          char   name[40];
+          float  gpa;
+      };</code></pre>
+      
+          <h4>Structure Size</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      struct S { int a; char b; double c; };
+      
+      int main(void) {
+          printf("sizeof(struct S) = %zu\n", sizeof(struct S)); // includes padding
+          return 0;
+      }</code></pre>
+      
+          <h4>Accessing Members (example)</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      struct Student { int id; char name[40]; float gpa; };
+      
+      int main(void) {
+          struct Student st = {1, "Mina Rai", 3.85f};
+          printf("%d %s %.2f\n", st.id, st.name, st.gpa);
+          return 0;
+      }</code></pre>
+      
+          <h4>Nested Structure</h4>
+          <pre><code class="language-c">struct Date { int y, m, d; };
+      struct Student { int id; struct Date dob; };
+      
+      struct Student s = { 1, {2006, 7, 14} };</code></pre>
+      
+          <h4>Array of Structures</h4>
+          <pre><code class="language-c">struct Student { int id; char name[40]; };
+      struct Student cls[3] = {
+          {1, "Aarav"}, {2, "Mina"}, {3, "Suresh"}
+      };</code></pre>
+      
+          <h4>Passing Structure to Function</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      struct Student { int id; char name[40]; float gpa; };
+      
+      void printStudent(struct Student s) {            // by value
+          printf("#%d %s (%.2f)\n", s.id, s.name, s.gpa);
+      }
+      void bumpGPA(struct Student *s, float delta) {   // by reference
+          s-&gt;gpa += delta;
+      }
+      
+      int main(void) {
+          struct Student st = {1, "Mina", 3.6f};
+          printStudent(st);
+          bumpGPA(&st, 0.2f);
+          printStudent(st);
+          return 0;
+      }</code></pre>
+      
+          <h4>Union — Introduction &amp; Syntax</h4>
+          <pre><code class="language-c">union Number {
+          int   i;
+          float f;
+          double d;
+      }; // shares the same memory; size == size of largest member</code></pre>
+      
+          <h4>Structure vs Union</h4>
+          <ul>
+            <li><b>Structure</b>: members have separate storage; size ≈ sum (plus padding).</li>
+            <li><b>Union</b>: members overlap; only one valid member at a time; size = largest member.</li>
+            <li>Use union when values are mutually exclusive (saves memory).</li>
+          </ul>
+        </div>
+      
+        <!-- POINTERS -->
+        <div class="pointers">
+          <h3>Pointers</h3>
+      
+          <h4>Introduction &amp; Syntax</h4>
+          <pre><code class="language-c">int *p;   // pointer to int
+      p = NULL; // good practice to initialize</code></pre>
+      
+          <h4>Usage &amp; Working; Value &amp; Address</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int main(void) {
+          int a = 42;
+          int *p = &a;            // address-of
+          printf("%d\n", *p);     // dereference -&gt; 42
+          *p = 100;               // modify through pointer
+          printf("%d\n", a);      // 100
+          return 0;
+      }</code></pre>
+      
+          <h4>Declaration &amp; Initialization; Pointer &amp; Function</h4>
+          <pre><code class="language-c">void setZero(int *x) { *x = 0; }
+      
+      int main(void) {
+          int v = 5;
+          setZero(&v);
+          // v is now 0
+      }</code></pre>
+      
+          <h4>Call by Reference Example</h4>
+          <pre><code class="language-c">void scale(int *arr, int n, int k) {
+          for (int i = 0; i &lt; n; ++i) arr[i] *= k;
+      }</code></pre>
+      
+          <h4>Pointer with Arrays</h4>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int main(void) {
+          int a[4] = {1,2,3,4};
+          int *p = a;                  // same as &a[0]
+          printf("%d %d\n", *(p+1), a[1]); // both 2
+          return 0;
+      }</code></pre>
+      
+          <h4>Call by Value vs Call by Reference (Quick Comparison)</h4>
+          <ul>
+            <li><b>Value</b>: safer isolation; no side effects; copies cost for large objects.</li>
+            <li><b>Reference (pointers)</b>: efficient updates; risk of unintended mutation; must handle NULL carefully.</li>
+          </ul>
+      
+          <h4>Advantages / Disadvantages of Pointers</h4>
+          <ul>
+            <li><b>+ </b>Efficient parameter passing, dynamic memory, low-level control.</li>
+            <li><b>− </b>Can cause bugs (dangling, leaks) if misused; need careful discipline.</li>
+          </ul>
+        </div>
+      
+        <!-- FILE HANDLING -->
+        <div class="file_handling">
+          <h3>File Handling</h3>
+      
+          <h4>Concept &amp; Need</h4>
+          <p>Files let programs persist data beyond execution, share data with other programs, and handle large datasets efficiently.</p>
+      
+          <h4>Sequential vs Random Files</h4>
+          <ul>
+            <li><b>Sequential:</b> read/write from start to end (logs, text).</li>
+            <li><b>Random (direct access):</b> jump to positions using byte offsets (records, indices).</li>
+          </ul>
+      
+          <h4>File Opening Modes</h4>
+          <ul>
+            <li><b>r</b> (read), <b>r+</b> (read/update)</li>
+            <li><b>w</b> (write, truncate/create), <b>w+</b> (read/write, truncate/create)</li>
+            <li><b>a</b> (append), <b>a+</b> (read/append)</li>
+          </ul>
+      
+          <h4>Steps to Work with a File</h4>
+          <ol>
+            <li>Define a file pointer: <code>FILE *fp;</code></li>
+            <li>Open with required mode: <code>fp = fopen("data.txt","r");</code></li>
+            <li>Read/Write/Append as needed.</li>
+            <li>Close the file: <code>fclose(fp);</code></li>
+          </ol>
+      
+          <h4>Common Functions — Purpose &amp; Syntax</h4>
+          <table>
+            <tr><th>Function</th><th>Purpose</th><th>Syntax (snippet)</th></tr>
+            <tr><td><code>fopen</code></td><td>Open a file</td><td><code>FILE *fp = fopen("f.txt","w");</code></td></tr>
+            <tr><td><code>fclose</code></td><td>Close a file</td><td><code>fclose(fp);</code></td></tr>
+            <tr><td><code>getc</code> / <code>putc</code></td><td>Read/Write a char</td><td><code>int ch=getc(fp); putc('A',fp);</code></td></tr>
+            <tr><td><code>fprintf</code> / <code>fscanf</code></td><td>Formatted I/O</td><td><code>fprintf(fp,"%d %s",n,s); fscanf(fp,"%d%s",&amp;n,s);</code></td></tr>
+            <tr><td><code>getw</code> / <code>putw</code></td><td>Legacy int I/O (non-standard)</td><td><code>putw(n,fp); n=getw(fp);</code></td></tr>
+            <tr><td><code>fgets</code> / <code>fputs</code></td><td>Line/string I/O</td><td><code>fgets(buf,sz,fp); fputs(buf,fp);</code></td></tr>
+            <tr><td><code>fread</code> / <code>fwrite</code></td><td>Binary block I/O</td><td><code>fwrite(&amp;x,sizeof x,1,fp); fread(&amp;x,sizeof x,1,fp);</code></td></tr>
+            <tr><td><code>remove</code> / <code>rename</code></td><td>Delete/Rename file</td><td><code>remove("old.txt"); rename("a.txt","b.txt");</code></td></tr>
+          </table>
+      
+          <h4>Random Access Functions — Purpose &amp; Syntax</h4>
+          <table>
+            <tr><th>Function</th><th>Purpose</th><th>Syntax (snippet)</th></tr>
+            <tr><td><code>fseek</code></td><td>Move file position</td><td><code>fseek(fp, offset, SEEK_SET/SEEK_CUR/SEEK_END);</code></td></tr>
+            <tr><td><code>rewind</code></td><td>Go to start</td><td><code>rewind(fp);</code></td></tr>
+            <tr><td><code>ftell</code></td><td>Get current position</td><td><code>long pos = ftell(fp);</code></td></tr>
+          </table>
+      
+          <h4>Examples</h4>
+          <h5>Write, Read, Append, EOF</h5>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int main(void) {
+          FILE *fp = fopen("data.txt","w");
+          if (!fp) return 1;
+          fprintf(fp, "Hello\nWorld\n");
+          fclose(fp);
+      
+          fp = fopen("data.txt","r");
+          int ch;
+          while ((ch = getc(fp)) != EOF) putchar(ch);
+          fclose(fp);
+      
+          fp = fopen("data.txt","a");
+          fputs("Appended line\n", fp);
+          fclose(fp);
+          return 0;
+      }</code></pre>
+      
+          <h5>Random Access (fseek, ftell, rewind)</h5>
+          <pre><code class="language-c">#include &lt;stdio.h&gt;
+      
+      int main(void) {
+          FILE *fp = fopen("nums.bin","wb+");
+          if (!fp) return 1;
+          for (int i=1;i&lt;=5;i++) fwrite(&amp;i,sizeof i,1,fp);
+      
+          // Jump to third int (0-based: offset 2)
+          fseek(fp, 2 * sizeof(int), SEEK_SET);
+          int x; fread(&amp;x,sizeof x,1,fp);      // reads 3
+          printf("%d\n", x);
+      
+          long pos = ftell(fp);                 // after reading 3
+          printf("pos=%ld\n", pos);
+      
+          rewind(fp);                           // back to start
+          fclose(fp);
+          return 0;
+      }</code></pre>
+        </div>
+      
+        <!-- TYPEDEF -->
+        <div class="typedef">
+          <h3><code>typedef</code> Keyword in C</h3>
+          <p><code>typedef</code> creates an alias for types, improving readability and portability.</p>
+          <pre><code class="language-c">typedef unsigned long  u64;
+      typedef int (*cmp_fn)(const void *, const void *);
+      
+      typedef struct {
+          int x, y;
+      } Point;
+      
+      u64 area(u64 a, u64 b) { return a*b; }</code></pre>
+        </div>
+      
+      </div>
+      
+
+     </div>
+
+</section>
+
+          <section id="ch1" class="chapter-content" style="display: none;">
+            <div class="unit">
+                <h2>Chapter-1</h2>
+                <h1>DATABASE MANAGEMENT SYSTEM</h1>
+            </div>
+        
+            <div class="content">
+             <div class="data"></div>
+                <h3>Data: </h3>
+                <p>In computing, data is information translated into a form that is efficient for movement or processing. Relative to today's computers and transmission media, data is information converted into binary digital form. It is acceptable to use data as a singular subject or a plural subject. Raw data is a term that describes data in its most basic digital format.</p>
+        
+                <p>The concept of data in the context of computing has its roots in the work of Claude Shannon, an American mathematician known as the father of information theory. He ushered in binary digital concepts based on applying two-value Boolean logic to electronic circuits. Binary digit formats underlie the CPUs, semiconductor memories and disk drives, as well as many of the peripheral devices common in computing today. Early computer input for control and data took the form of punch cards, followed by magnetic tape and the hard disk.</p>
+        
+                <p>Early on, data's importance in business computing became apparent by the popularity of the terms data processing and electronic data processing, which, for a time, encompassed the full gamut of what is now known as information technology. Over the history of corporate computing, specialization occurred, and a distinct data profession emerged along with growth of corporate data processing.</p>
+              </div>
+        
+             <div class="info">
+                <h3>Information: </h3>
+                <p>Information is the output that results from analyzing, contextualizing, structuring, interpreting or in other ways processing data. Information infuses meaning and value into the data. It facilitates understanding, communication and learning, and is a key factor in system designs and strategic planning, as well as in problem-solving and decision-making. Information brings context to the data, turning what would otherwise be meaningless content into something comprehensible and usable.</p>
+
+                <h4>Features of information: </h4>
+                <p>Accuracy: Free from errors.</p>
+                <p>Timeliness: Available when needed.</p>
+                <p>Relevance: Useful for the purpose.</p>
+                <p>Completeness: Contains all necessary details.</p>
+                <p>Consistency: Uniform across systems.</p>
+                <p>Understandability: Easily comprehensible.</p>
+             </div>
+        
+             <div class="database">
+                <h3>Database: </h3>
+                <p>A database is an electronically stored, systematic collection of data that can include words, numbers, images, videos, and other types of files. Databases are managed using specialized software called a Database Management System (DBMS), which allows users to store, retrieve, and manipulate data efficiently. Databases are the backbone of modern applications, supporting businesses, organizations, and systems across industries.</p>
+                <h4>Purposes of database</h4>
+                <ul>
+                <li>Store large volumes of data efficiently</li>
+                <li>Enable quick retrieval and manipulation</li>
+                <li>Maintain data integrity and security</li>
+                <li>Support multi-user access</li>
+                </ul>
+            </div>
+        
+            <div class="terminologies">
+                <h3>Terminologies in database: </h3>
+                <p>Table: A collection of related data organized in rows and columns.</p>
+                <p>Field (Attribute): A column in a table representing a data type.</p>
+                <p>Record (Row/Tuple): A single entry in a table, consisting of fields.</p>
+                <p>Tuple: Synonym for a record; a single data item in a relation.</p>
+                <p>Object: An instance of a class in object-oriented databases; data plus behavior.</p>
+                <p>Keys: Unique identifiers used to access records (Primary Key, Foreign Key, Candidate Key).</p>
+            </div>
+
+            <div class="data_dictionary">
+                <h3>Data Dictionary: </h3>
+                <p>A data dictionary is a centralized repository of information about data such as meaning, relationships to other data, origin, usage, and format. It helps users and administrators understand database structure, metadata, and constraints.</p>
+            </div>
+
+            <div class="database_management_system">
+                <h3>Database Management System: </h3>
+                <h4>Indroduction: </h4>
+                <p>A Database Management System (DBMS) is software that allows users to define, manipulate, retrieve, and manage data efficiently. It acts as an interface between users and the database. </p>
+                <h4>Objectives: </h4>
+                <ul>
+                    <li>Organize and store large volumes of data.</li>
+                    <li>Allow multiple users to access data concurrently.</li>
+                    <li>Ensure data integrity and security.</li>
+                    <li>Minimize data redundancy.</li>
+                    <li>Enable easy data retrieval and reporting.</li>
+                </ul>
+                <h4>Advantages: </h4>
+                <ul>
+                    <li>Reduced data redundancy</li>
+                    <li>Improved data integrity and consistency</li>
+                    <li>Easy data access and management</li>
+                    <li>Multi-user access control</li>
+                    <li>Data security and backup features</li>
+                </ul>
+                <h4>Disadvantages: </h4>
+                <ul>
+                    <li>Complex and costly to implement</li>
+                    <li>Requires high technical knowledge</li>
+                    <li>Increased risk if system crashes</li>
+                    <li>Regular maintenance required</li>
+               </ul>
+           </div>
+
+           <div class="database_models">
+            <h3>Types of database models: </h3>
+            <h4>Hierarchical Model</h4>
+            <ul>
+                <li>Data is organized in a tree-like structure.</li>
+                <li>Each child has only one parent.</li>
+                <li>Example: File directory systems.</li>
+            </ul>
+            <h4>Network Model</h4>
+            <ul>
+                <li>Data is represented as records and relationships as links.</li>
+                <li>A record can have multiple parent and child records.</li>
+                <li>Example: Telecom networks.</li>
+            </ul>
+            <h4>Relational Model</h4>
+            <ul>
+                <li>Data is stored in tables (relations) with rows and columns.</li>
+                <li>Uses SQL for querying.</li>
+                <li>Most widely used.</li>
+            </ul>
+            <h4>Entity-Relationship Model (ER Model)</h4>
+            <ul>
+                <li>Represents real-world entities and their relationships.</li>
+                <li>Used during database design to visualize schema structure.</li>
+            </ul>
+           </div>
+
+           <div class="integrity_constraints">
+            <h3>Integrity Constraints and Their Types</h3>
+            <h4>Domain Constraint:</h4>
+            <p>Specifies the allowed values for a given attribute.</p>
+            <h4>Entity Integrity:</h4>
+            <p>Each table must have a primary key; values cannot be null.</p>
+            <h4> Referential Integrity:</h4>
+            <p>Foreign key values must match primary key values in the referenced table or be null.</p>
+            <h4>Keys:</h4>
+            <ul>
+                <li>Primary Key: Uniquely identifies each record.</li>
+                <li>Foreign Key: Links one table to another.</li>
+                <li>Candidate Key: Potential primary keys.</li>
+                <li>Composite Key: Multiple fields together uniquely identify a row.</li>
+            </ul>
+           </div>
+
+           <div class="normalization:">
+            <h3>Normalization:</h3>
+            <p>Normalization is the process of organizing data to reduce redundancy and improve data integrity.</p>
+            <h4>1NF (First Normal Form): No repeating groups or arrays.</h4>
+            <h4>2NF (Second Normal Form): 1NF + No partial dependency.</h4>
+            <h4>3NF (Third Normal Form): 2NF + No transitive dependency.</h4>
+
+            <h4>Advantages: </h4>
+            <ul>
+                <li>Removes data redundancy</li>
+                <li>Ensures data integrity</li>
+                <li>Simplifies data maintenance</li>
+            </ul>
+
+            <h4>Disadvantages</h4>
+            <ul>
+                <li>Complex joins for queries</li>
+                <li>More tables to manage</li>
+            </ul>
+           </div>
+
+           <div class="DistributedVsCentralized">
+            <h3>centralized Database</h3>
+            <h4>Introduction:</h4>
+            <p>All data is stored at a single location.</p>
+            <h4>Advantages: </h4>
+            <ul>
+                <li>Easier to maintain</li>
+                <li>Simple backup and recovery</li>
+            </ul>
+            <h4>Disadvantages</h4>
+            <ul>
+                <li>Single point of failure</li>
+                <li>Slow access for remote users</li>
+            </ul>
+            <h3>Distributed Database</h3>
+            <h4>Introduction:</h4>
+            <p>Data is distributed across multiple physical locations.</p>
+            <h4>Advantages: </h4>
+            <ul>
+                <li>Better reliability and availability</li>
+                <li>Faster local access</li>
+            </ul>
+            <h4>Disadvantages</h4>
+            <ul>
+                <li>Complex management</li>
+                <li>Expensive setup</li>
+            </ul>
+           </div>
+
+           <div class="Database Security">
+            <h3>Database Security</h3>
+            <p>Database security involves protecting data from unauthorized access, misuse, or corruption.</p>
+            <h4>Challenges</h4>
+            <ul>
+                <li>Unauthorized access</li>
+                <li>SQL injection attacks</li>
+                <li>Insider threats</li>
+                <li>Data leaks</li>
+
+            </ul>
+            <h4> Security Measures</h4>
+            <ul>
+                <li>Authentication & Authorization</li>
+                <li>Encryption</li>
+                <li>Firewalls</li>
+                <li>Backup & Audit Trails</li>
+
+            </ul>
+            <h4> Role of DBA (Database Administrator)</h4>
+            <ul>
+                <li>Manage user roles and permissions</li>
+                <li>Perform regular backups</li>
+                <li>Monitor database performance</li>
+                <li>Enforce security policies</li>
+
+            </ul>
+           </div>
+
+           <div class="ddl">
+            <h3>DDL (Data Definition Language)</h3>
+            <p>Used to define and modify the structure of database objects.</p>
+            <ul>
+                <li>Examples: CREATE, ALTER, DROP</li>
+            </ul>
+           </div>
+
+           <div class="dml">
+            <h3>DML (Data Manipulation Language)</h3>
+            <p>Used to manipulate data within tables.</p>
+            <ul>
+                <li>Examples: SELECT, INSERT, UPDATE, DELETE</li>
+            </ul>
+           </div>
+
+           <div class="SQL_datatypes">
+            <h3>SQL Datatypes</h3>
+            <h4>CHAR- Fixed-length character string</h4>
+            <h4>VARCHAR- Variable-length character string</h4>
+            <h4>BINARY- Fixed-length binary data</h4>
+            <h4>VARBINARY- Variable-length binary data</h4>
+            <h4>TINYBLOB- Very small binary large object</h4>
+            <h4>TINYTEXT- Very small text string</h4>
+            <h4>TEXT- Large text field</h4>
+            <h4>LONGTEXT- Very large text field</h4>
+            <h4>ENUM- String object with predefined values</h4>
+            <h4>BIT- Bit-field type</h4>
+            <h4>TINYINT- Small integer (1 byte)</h4>
+            <h4>BOOLEAN- True/False (alias for TINYINT)</h4>
+            <h4>INTEGER- Whole number (4 bytes)</h4>
+            <h4>FLOAT- Single-precision floating point</h4>
+            <h4>DOUBLE- Double-precision floating point</h4>
+            <h4>DECIMAL- Fixed-point number</h4>
+            <h4>DATE- Date format YYYY-MM-DD</h4>
+            <h4>DATETIME- Date and time format YYYY-MM-DD HH:MM:SS</h4>
+
+           </div>
+           <div class="er-diagrams">
+            <h3>ER Diagrams</h3>
+          
+            <h4>Introduction</h4>
+            <p>An Entity–Relationship (ER) diagram is a conceptual data model used to visualize real-world entities, their attributes, and the relationships among them before implementing a database. ER modeling helps identify tables, keys, and constraints and reduces design errors early.</p>
+          
+            <h4>Entities, Attributes, Relationships</h4>
+            <ul>
+              <li><b>Entity:</b> A real-world object or concept (e.g., <i>Student</i>, <i>Course</i>). In a relational database, an entity typically becomes a table.</li>
+              <li><b>Attribute:</b> A property of an entity (e.g., <i>Student</i> → <i>StudentID, Name, DOB</i>).
+                <ul>
+                  <li><i>Simple</i> (atomic): <code>Age</code></li>
+                  <li><i>Composite</i>: <code>Name =&gt; {First, Middle, Last}</code></li>
+                  <li><i>Derived</i>: <code>Age</code> from <code>DOB</code></li>
+                  <li><i>Multi-valued</i>: <code>Phone{}</code></li>
+                  <li><i>Key attribute</i>: Uniquely identifies an entity instance (underlined in Chen notation)</li>
+                </ul>
+              </li>
+              <li><b>Relationship:</b> Association among entities (e.g., <i>Student</i> <b>enrolls</b> in <i>Course</i>).
+                <ul>
+                  <li><i>Unary</i> (degree 1): relationship within the same entity (employee manages employee)</li>
+                  <li><i>Binary</i> (degree 2): most common (student–course)</li>
+                  <li><i>Ternary</i> (degree 3): three entities participate (doctor–patient–drug)</li>
+                </ul>
+              </li>
+            </ul>
+          
+            <h4>Cardinality &amp; Participation</h4>
+            <ul>
+              <li><b>Cardinality</b>: 1:1, 1:N, M:N (crow’s foot or Chen notations). Indicates the number of instances that can relate.</li>
+              <li><b>Participation</b>: <i>Total</i> (mandatory) vs <i>Partial</i> (optional). Total is often shown with a double line from entity to relationship.</li>
+            </ul>
+          
+            <h4>Symbols (Chen notation)</h4>
+            <ul>
+              <li><b>Entity:</b> Rectangle (weak entity: double rectangle)</li>
+              <li><b>Relationship:</b> Diamond (identifying: double diamond)</li>
+              <li><b>Attribute:</b> Oval (key: underlined; multivalued: double oval; derived: dashed oval)</li>
+              <li><b>Cardinality:</b> 1:1, 1:N, M:N shown along connecting lines (or crow’s foot on relationship ends)</li>
+            </ul>
+          
+            <h4>Mini-Example (Concept → Tables)</h4>
+            <p><b>Entities:</b> <code>Student(StudentID, Name, Email)</code>, <code>Course(CourseID, Title, Credit)</code><br>
+               <b>Relationship:</b> <code>Enrolls</code> (M:N) with attribute <code>Grade</code> ⇒ resolves to intersection <code>Enrollment</code> table.</p>
+            <pre><code>Tables:
+            Student(StudentID PK, Name, Email UNIQUE)
+            Course(CourseID PK, Title, Credit)
+            Enrollment(EnrollID PK, StudentID FK, CourseID FK, Grade, UNIQUE(StudentID, CourseID))</code></pre>
+          </div>
+          <div class="sql-joins">
+            <h3>SQL JOINs (with Examples)</h3>
+            <p>We’ll reuse the <code>Student</code>, <code>Course</code>, and <code>Enrollment</code> tables.</p>
+          
+            <h4>INNER JOIN</h4>
+            <p>Returns rows that have matches in both tables.</p>
+            <pre><code class="language-sql">SELECT s.StudentID, s.Name, c.Title, e.Grade
+          FROM Enrollment e
+          INNER JOIN Student s ON s.StudentID = e.StudentID
+          INNER JOIN Course  c ON c.CourseID  = e.CourseID;</code></pre>
+          
+            <h4>LEFT JOIN</h4>
+            <p>All rows from left table + matched rows from right; unmatched right columns are <code>NULL</code>.</p>
+            <pre><code class="language-sql">SELECT s.StudentID, s.Name, c.Title, e.Grade
+          FROM Student s
+          LEFT JOIN Enrollment e ON e.StudentID = s.StudentID
+          LEFT JOIN Course    c  ON c.CourseID  = e.CourseID;</code></pre>
+          
+            <h4>RIGHT JOIN</h4>
+            <p>All rows from right table + matched rows from left; useful to see courses with no enrollments.</p>
+            <pre><code class="language-sql">SELECT c.CourseID, c.Title, s.Name, e.Grade
+          FROM Student s
+          RIGHT JOIN Enrollment e ON e.StudentID = s.StudentID
+          RIGHT JOIN Course    c  ON c.CourseID  = e.CourseID;</code></pre>
+          
+            <h4>FULL OUTER JOIN</h4>
+            <p>All rows from both sides; unmatched columns are <code>NULL</code>. Some engines (e.g., MySQL) don’t support it natively—use <code>UNION</code>.</p>
+            <pre><code class="language-sql">-- ANSI FULL OUTER JOIN alternative (MySQL style)
+          SELECT s.StudentID, s.Name, c.CourseID, c.Title, e.Grade
+          FROM Student s
+          LEFT JOIN Enrollment e ON e.StudentID = s.StudentID
+          LEFT JOIN Course    c  ON c.CourseID  = e.CourseID
+          UNION
+          SELECT s.StudentID, s.Name, c.CourseID, c.Title, e.Grade
+          FROM Student s
+          RIGHT JOIN Enrollment e ON e.StudentID = s.StudentID
+          RIGHT JOIN Course    c  ON c.CourseID  = e.CourseID;</code></pre>
+          </div>
+                    
+      </div>
+        
+            </div>
+            
+          </section>
+        </main>
+      </div>
+    
+      <script>
+        function showChapter(id) {
+          document.querySelectorAll('.chapter-content').forEach(ch => ch.style.display = 'none');
+          document.getElementById(id).style.display = 'block';
+        }
+      </script>
+</body>
+
+</html>
